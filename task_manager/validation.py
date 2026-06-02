@@ -1,26 +1,23 @@
-# validation.py
+from datetime import datetime
 
 def validate_task_title(title):
-    """Validate that the task title is not empty."""
-    if len(title.strip()) == 0:
-        raise ValueError("Task title cannot be empty.")
+    if len(title) == 0:
+        raise ValueError("Title cannot be empty.")
     return True
+    
 
-
-def validate_task_id(task_id, tasks):
-    """Validate that the task ID exists in the task list."""
-    ids = [task["id"] for task in tasks]
-    if task_id not in ids:
-        raise ValueError(f"No task found with ID {task_id}.")
-    return True
-
-
-def validate_positive_integer(value):
-    """Validate that the value is a positive integer."""
+def validate_task_description(description):
+    if len(description) == 0:
+        raise ValueError("Description cannot be empty.")
+    return True    
+    
+    
+def validate_due_date(due_date):
     try:
-        num = int(value)
-        if num <= 0:
-            raise ValueError("ID must be a positive integer.")
-        return num
+        datetime.strptime(due_date, "%Y-%m-%d")
+        return True
     except ValueError:
-        raise ValueError("Please enter a valid positive number.")
+        raise ValueError("Invalid date format. Use YYYY-MM-DD.")
+   
+
+   
